@@ -1,29 +1,40 @@
-# Ex.No:4(D) DESIGN PATTERN  ---- BEHAVIOUR PATTERN
+# Ex.No:4(B)  IMPLEMENT SOLID PRINCIPLES IN JAVA PROGRAM 
 
 ## QUESTION:
-Create a program that sends different types of notifications: "email", "sms", and "push". Use the Factory Pattern to generate the appropriate notification sender and call its notifyUser() method.
+In a gaming lounge, there is only one master console power switch that controls all gaming consoles. Whenever a player turns on any console, it internally triggers the master power. The master switch must ensure only one instance is ever created, regardless of how many times it's accessed, to prevent power fluctuations.
+
+Every time a player accesses the master switch, it logs an access count. Since the switch is Singleton, the count should increment globally and reflect shared state.
+
+Input Format:
+
+n [Player1] [Player2] ... First line: Integer n – number of players turning on consoles
+
+Next n lines: Each line contains the player's name.
+
+Output Format: For each player, print:
+
+[PlayerName] accessed Master Power Switch. Total accesses so far: [count]
+<img width="699" height="290" alt="517287171-9b857649-79d5-4413-bfe6-09e4dd6ff5b2" src="https://github.com/user-attachments/assets/ea71e94c-5987-4570-b97e-18ae39e1d340" />
+
+
 
 ## AIM:
-To write a Java program that demonstrates a Behavioral Pattern using the Factory Method, allowing different notification types to send messages through a common interface.
+To implement a Singleton master power switch that logs shared access counts whenever players turn on their consoles.
 
 ## ALGORITHM :
 1.Start the program.
-2.Import the necessary package 'java.util'
-3.Create an interface Notification with method notifyUser().
-4.Implement concrete classes: EmailNotification, SMSNotification, and PushNotification.
-5.Create a NotificationFactory that returns the appropriate object based on user input.
-6.In main(), get the notification type from the user.
-7.Call the notifyUser() method of the returned object.
-8.If no valid type is provided, display an error.
-9.Stop the program.
 
+2.Create a Scanner object to take input from the user.
 
+3.Read an integer n representing the number of players.
 
+4.For each of the n players: a. Read the player’s name. b. Access the singleton instance of MasterPowerSwitch using getInstance(). c. Call logAccess() on the instance to increment and retrieve the total access count. d. Print the message: [PlayerName] accessed Master Power Switch. Total accesses so far: [count].
 
+5.End the program.
 ## PROGRAM:
  ```
 /*
-Program to implement a Behaviour Pattern using Java
+Program to implement a SOLID Principles in Java Program
 Developed by: Bhagathkrishna A
 RegisterNumber:212223230029
 */
@@ -31,67 +42,39 @@ RegisterNumber:212223230029
 
 ## SOURCE CODE:
 ```
-import java.util.Scanner;
+import java.util.*;
 
-interface Notification {
-    void notifyUser();
-}
+class MasterPowerSwitch {
+    private static MasterPowerSwitch instance;
+    private int accessCount = 0;
 
-// ===== Concrete Notifications =====
-class EmailNotification implements Notification {
-    public void notifyUser() {
-        System.out.println("Sending Email Notification");
-    }
-}
+    private MasterPowerSwitch() {}
 
-class SMSNotification implements Notification {
-    public void notifyUser() {
-        System.out.println("Sending SMS Notification");
-    }
-}
-
-class PushNotification implements Notification {
-    public void notifyUser() {
-        System.out.println("Sending Push Notification");
-    }
-}
-
-// ===== Factory =====
-class NotificationFactory {
-    public Notification createNotification(String type) {
-        if (type == null) return null;
-        switch (type.toLowerCase()) {
-            case "email":
-                return new EmailNotification();
-            case "sms":
-                return new SMSNotification();
-            case "push":
-                return new PushNotification();
-            default:
-                return null;
+    public static MasterPowerSwitch getInstance() {
+        if (instance == null) {
+            instance = new MasterPowerSwitch();
         }
+        return instance;
+    }
+
+    public int logAccess() {
+        accessCount++;
+        return accessCount;
     }
 }
 
-// ===== Main =====
-public class Main {
+public class prog {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        NotificationFactory factory = new NotificationFactory();
+        int n = sc.nextInt();
+        sc.nextLine();
 
-        while (true) {
-            String input = sc.nextLine().trim();
-            if (input.equalsIgnoreCase("exit")) break;
-
-            Notification n = factory.createNotification(input);
-            if (n != null) {
-                n.notifyUser();
-            } else {
-                System.out.println("Invalid notification type: " + input);
-            }
+        for (int i = 0; i < n; i++) {
+            String player = sc.nextLine();
+            MasterPowerSwitch power = MasterPowerSwitch.getInstance();
+            int count = power.logAccess();
+            System.out.println(player + " accessed Master Power Switch. Total accesses so far: " + count);
         }
-
-        sc.close();
     }
 }
 ```
@@ -105,8 +88,8 @@ public class Main {
 
 ## OUTPUT:
 
-<img width="683" height="314" alt="java45" src="https://github.com/user-attachments/assets/e569156c-5ef2-4c74-be28-9884a82749bb" />
+<img width="1125" height="244" alt="517288112-1493987f-a93b-456e-a0b4-ff1c9bff3c7b" src="https://github.com/user-attachments/assets/f9ab1529-8db2-4715-b702-bb2820b36cf5" />
 
 
 ## RESULT:
-Thus, the program demonstrating the Behavioral Pattern using Factory Method to generate different notification types was successfully implemented and executed.
+The program ensures a single shared instance, incrementing and displaying the total access count for each player.
