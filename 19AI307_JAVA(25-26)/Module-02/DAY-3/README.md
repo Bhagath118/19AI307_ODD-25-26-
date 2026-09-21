@@ -1,25 +1,28 @@
-# Ex.No:2(C) ACCESS SPECIFIERS
+# Ex.No:2(D) VARIABLE SCOPE AND CONSTRUCTOR
 
 ## QUESTION:
-Write a Java program to create a class called Person with private instance variables name, age. and country. Provide public getter and setter methods to access and modify these variables.
+Write a java code to implement a parameterised constructor that will initialize the id,name,age,gender,doj,dob of the student and print the details using user defined function.
 
 ## AIM:
-To write a Java program that defines a class Person with private instance variables name, age, and country, and to provide public getter and setter methods to access and modify these variables.
+To write a Java program that implements a parameterized constructor to initialize the details of a student such as ID, name, age, gender, date of joining (doj), and date of birth (dob), and to print these details using a user-defined function.
 
 ## ALGORITHM :
 1.Start the program.
 2.Import the necessary package 'java.util'
-3.Create a class named Person.
-4.Declare private instance variables:
+3.Create a class named Student.
+4.Declare instance variables:
+id (int)
 name (String)
 age (int)
-country (String)
-5.Define public setter methods to assign values to each variable.
-6.Define public getter methods to retrieve the values of each variable.
+gender (String)
+doj (date of joining) (String)
+dob (date of birth) (String)
+5.Create a parameterized constructor to initialize all the variables.
+6.Create a user-defined function (e.g., displayDetails()) to print the student's information.
 7.In the main method:
-Create an object of the Person class.
-Use setter methods to set name, age, and country.
-Use getter methods to display the values.
+Read the student details from the user.
+Create an object of Student using the parameterized constructor.
+Call the display function to show the student details.
 8.End the program.
 
 
@@ -29,62 +32,58 @@ Use getter methods to display the values.
 ## PROGRAM:
  ```
 /*
-Program to implement a Access Specifiers using Java
+Program to implement a Variable scope and Constructor using Java
 Developed by: Bhagathkrishna A
-RegisterNumber:212223230029
+RegisterNumber:212223230029  
 */
 ```
 
 ## SOURCE CODE:
-
 ```
-import java.util.*;
-class Person
+import java.util.Scanner;
+class Student
 {
-    private String name;
-    private int age;
-    private String country;  
-    public String getName()
+    int id, age;
+    String name, gender, doj, dob;
+    Student(int id, String name, int age, String gender, String doj, String dob)
     {
-        return name;
-    }
-    public void setName(String name)
-    {
+        this.id = id;
         this.name = name;
-    }
-    public int getAge()
-    {
-        return age;
-    }
-    public void setAge(int age)
-    {
         this.age = age;
+        this.gender = gender;
+        this.doj = doj;
+        this.dob = dob;
     }
-    public String getCountry()
+
+    void display()
     {
-        return country;
-    }
-    public void setCountry(String country)
-    {
-        this.country = country;
+        System.out.println("--- Student Details ---");
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Gender: " + gender);
+        System.out.println("Date of Joining: " + doj);
+        System.out.println("Date of Birth: " + dob);
     }
 }
-public class prog
+
+public class Main
 {
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
-        Person obj = new Person();
-        obj.setName(sc.nextLine());
-        obj.setAge(sc.nextInt());
-        obj.setCountry(sc.nextLine());
-        System.out.println("Person 1");
-        System.out.println("Name: " + obj.getName());
-        System.out.println("Age: " + obj.getAge());
-        System.out.println("Country: " + obj.getCountry());
+        int id = sc.nextInt();
+        String name = sc.next();
+        int age = sc.nextInt();
+        String gender = sc.next();
+        String doj = sc.next();
+        String dob = sc.next();
+        Student obj = new Student(id, name, age, gender, doj, dob);
+        obj.display();
     }
 }
 ```
+
 
 
 
@@ -93,9 +92,9 @@ public class prog
 
 
 ## OUTPUT:
-<img width="648" height="365" alt="516936254-ef3379a6-f10a-4c24-963d-9dfb149f2458" src="https://github.com/user-attachments/assets/3e45e47d-0382-4e22-9acb-94c31074a9e5" />
+<img width="632" height="563" alt="516940728-242724cb-ef25-4a17-8c5e-c4935bf7ff08" src="https://github.com/user-attachments/assets/903e95e2-7d36-438d-afa2-3c45ff8fb860" />
 
 
 
 ## RESULT:
-The program successfully creates a Person class with private variables and accesses them using getter and setter methods, demonstrating encapsulation in Java.
+The program successfully initializes student details using a parameterized constructor and prints them using a user-defined function.
